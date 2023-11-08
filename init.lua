@@ -236,11 +236,14 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
--- Set highlight on search
-vim.o.hlsearch = false
-
 -- Make line numbers default
 vim.wo.number = true
+-- Make relative line numbers defaul
+vim.wo.relativenumber = true
+
+-- padding
+vim.o.scrolloff=5
+vim.o.sidescrolloff=7
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -255,10 +258,22 @@ vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true
+vim.o.ul = 10000
+
+-- Redo with U
+vim.keymap.set('n', 'U', '<c-r>', {noremap=true, silent=true})
+
+-- Quick Save
+vim.keymap.set('n', 's', ':w<CR>', {noremap=true, silent=true})
+
+-- Set highlight on search
+vim.o.hlsearch = true
+vim.keymap.set('n', ';',':noh<CR>',{noremap=true, silent=true})
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.incsearch = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
@@ -275,6 +290,18 @@ vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
 
+-- Esc with jk and kj
+vim.keymap.set('i', 'jk','<esc>',{noremap=true, silent=true})
+vim.keymap.set('i', 'kj','<esc>',{noremap=true, silent=true})
+
+-- Easy new line with [ and ]
+vim.keymap.set('n', '<leader>[','O<esc>j',{noremap=true, silent=true})
+vim.keymap.set('n', '[<leader>','O<esc>j',{noremap=true, silent=true})
+vim.keymap.set('n', '<leader>]','o<esc>k',{noremap=true, silent=true})
+vim.keymap.set('n', ']<leader>','o<esc>k',{noremap=true, silent=true})
+-- Terminal visual block
+vim.keymap.set('n', '<leader>v','<c-v>',{noremap=true, silent=true})
+
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -282,6 +309,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.o.wrap = false
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
