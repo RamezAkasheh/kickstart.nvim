@@ -58,6 +58,9 @@ git clone https://github.com/nvim-lua/kickstart.nvim.git $env:USERPROFILE\AppDat
 
 ### Post Installation
 
+Install chocolatey: `winget install Chocolatey.Chocolatey`
+Run `choco install mingw` in admin powershell.
+
 Start Neovim
 
 ```sh
