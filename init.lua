@@ -78,6 +78,8 @@ require('lazy').setup({
 
   -- Extra added plugins 
   'tpope/vim-surround',
+  'easymotion/vim-easymotion',
+
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -128,11 +130,21 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      current_line_blame = true,
+      current_line_blame_opts = {
+          delay = 0,
+          virt_text = true,
+          virt_text_pos = "right_align",
+          virt_text_priority = 100
+        },
+
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
+
+        -- Navigation
+        -- next change
         vim.keymap.set({ 'n', 'v' }, ']c', function()
           if vim.wo.diff then
             return ']c'
@@ -142,6 +154,7 @@ require('lazy').setup({
           end)
           return '<Ignore>'
         end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
+        -- prev change
         vim.keymap.set({ 'n', 'v' }, '[c', function()
           if vim.wo.diff then
             return '[c'
@@ -151,6 +164,22 @@ require('lazy').setup({
           end)
           return '<Ignore>'
         end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
+
+        -- Actions
+        vim.keymap.set({'n','v'}, '<leader>hs', ':Gitsigns stage_hunk<cr>', {desc='git [H]unk [S]tage selected'})
+        vim.keymap.set({'n','v'}, '<leader>hr', ':Gitsigns reset_hunk<cr>', {desc='git [H]unk [R]eset selected'})
+        vim.keymap.set('n', '<leader>ha', gs.stage_hunk , {desc='git [H]unk [A]add'})
+        vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk , {desc='git [H]unk [U]ndo stage'})
+        -- vim.keymap.set('n', '<leader>hR', gs.reset_buffer , {desc='git [H]unk [R]eset BUFFER'})
+        vim.keymap.set('n', '<leader>hp', gs.preview_hunk, { buffer = bufnr, desc = 'git [H]unk [P]review' })
+        vim.keymap.set('n', '<leader>hb', function () gs.blame_line{full=true}end, { desc = 'git [H]unk [B]lame' })
+        vim.keymap.set('n', '<leader>hd',gs.diffthis, { desc = 'git [H]unk [D]iff' })
+        vim.keymap.set('n', '<leader>hD', function () gs.diffthis('~') end, { desc = 'git [H]unk [D]iff last commit' })
+        vim.keymap.set('n', '<leader>td',gs.toggle_deleted, { desc = 'git [T]oggle [D]eleted' })
+
+        -- text object
+        vim.keymap.set({'o','x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', {desc='[I]nside [H]unk'})
+
       end,
     },
   },
