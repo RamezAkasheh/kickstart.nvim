@@ -76,7 +76,7 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- Extra added plugins 
+  -- Extra added plugins
   'tpope/vim-surround',
   'easymotion/vim-easymotion',
   'github/copilot.vim',
@@ -117,7 +117,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -132,14 +132,13 @@ require('lazy').setup({
       },
       current_line_blame = true,
       current_line_blame_opts = {
-          delay = 0,
-          virt_text = true,
-          virt_text_pos = "right_align",
-          virt_text_priority = 100
-        },
+        delay = 0,
+        virt_text = true,
+        virt_text_pos = "right_align",
+        virt_text_priority = 100
+      },
 
       on_attach = function(bufnr)
-
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
 
@@ -166,20 +165,19 @@ require('lazy').setup({
         end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
 
         -- Actions
-        vim.keymap.set({'n','v'}, '<leader>hs', ':Gitsigns stage_hunk<cr>', {desc='git [H]unk [S]tage selected'})
-        vim.keymap.set({'n','v'}, '<leader>hr', ':Gitsigns reset_hunk<cr>', {desc='git [H]unk [R]eset selected'})
-        vim.keymap.set('n', '<leader>ha', gs.stage_hunk , {desc='git [H]unk [A]add'})
-        vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk , {desc='git [H]unk [U]ndo stage'})
+        vim.keymap.set({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<cr>', { desc = 'git [H]unk [S]tage selected' })
+        vim.keymap.set({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<cr>', { desc = 'git [H]unk [R]eset selected' })
+        vim.keymap.set('n', '<leader>ha', gs.stage_hunk, { desc = 'git [H]unk [A]add' })
+        vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'git [H]unk [U]ndo stage' })
         -- vim.keymap.set('n', '<leader>hR', gs.reset_buffer , {desc='git [H]unk [R]eset BUFFER'})
         vim.keymap.set('n', '<leader>hp', gs.preview_hunk, { buffer = bufnr, desc = 'git [H]unk [P]review' })
-        vim.keymap.set('n', '<leader>hb', function () gs.blame_line{full=true}end, { desc = 'git [H]unk [B]lame' })
-        vim.keymap.set('n', '<leader>hd',gs.diffthis, { desc = 'git [H]unk [D]iff' })
-        vim.keymap.set('n', '<leader>hD', function () gs.diffthis('~') end, { desc = 'git [H]unk [D]iff last commit' })
-        vim.keymap.set('n', '<leader>td',gs.toggle_deleted, { desc = 'git [T]oggle [D]eleted' })
+        vim.keymap.set('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = 'git [H]unk [B]lame' })
+        vim.keymap.set('n', '<leader>hd', gs.diffthis, { desc = 'git [H]unk [D]iff' })
+        vim.keymap.set('n', '<leader>hD', function() gs.diffthis('~') end, { desc = 'git [H]unk [D]iff last commit' })
+        vim.keymap.set('n', '<leader>td', gs.toggle_deleted, { desc = 'git [T]oggle [D]eleted' })
 
         -- text object
-        vim.keymap.set({'o','x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', {desc='[I]nside [H]unk'})
-
+        vim.keymap.set({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = '[I]nside [H]unk' })
       end,
     },
   },
@@ -193,59 +191,60 @@ require('lazy').setup({
     end,
   }, ]]
 
-  { "catppuccin/nvim",
+  {
+    "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
     config = function()
       require("catppuccin").setup({
-          flavour = "mocha", -- latte, frappe, macchiato, mocha
-          background = { -- :h background
-              light = "latte",
-              dark = "mocha",
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        background = {     -- :h background
+          light = "latte",
+          dark = "mocha",
+        },
+        transparent_background = false, -- disables setting the background color.
+        show_end_of_buffer = false,     -- shows the '~' characters after the end of buffers
+        term_colors = false,            -- sets terminal colors (e.g. `g:terminal_color_0`)
+        dim_inactive = {
+          enabled = true,               -- dims the background color of inactive window
+          shade = "dark",
+          percentage = 0.8,             -- percentage of the shade to apply to the inactive window
+        },
+        no_italic = false,              -- Force no italic
+        no_bold = false,                -- Force no bold
+        no_underline = false,           -- Force no underline
+        styles = {                      -- Handles the styles of general hi groups (see `:h highlight-args`):
+          comments = { "italic" },      -- Change the style of comments
+          conditionals = { "italic" },
+          loops = {},
+          functions = {},
+          keywords = {},
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = {},
+          operators = {},
+        },
+        color_overrides = {
+          mocha = {
+            base = "#000000",
+          }
+        },
+        custom_highlights = {},
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          notify = false,
+          mini = {
+            enabled = true,
+            indentscope_color = "",
           },
-          transparent_background = false, -- disables setting the background color.
-          show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-          term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
-          dim_inactive = {
-              enabled = true, -- dims the background color of inactive window
-              shade = "dark",
-              percentage = 0.8, -- percentage of the shade to apply to the inactive window
-          },
-          no_italic = false, -- Force no italic
-          no_bold = false, -- Force no bold
-          no_underline = false, -- Force no underline
-          styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-              comments = { "italic" }, -- Change the style of comments
-              conditionals = { "italic" },
-              loops = {},
-              functions = {},
-              keywords = {},
-              strings = {},
-              variables = {},
-              numbers = {},
-              booleans = {},
-              properties = {},
-              types = {},
-              operators = {},
-          },
-          color_overrides = {
-              mocha = {
-                base = "#000000",
-              }
-          },
-          custom_highlights = {},
-          integrations = {
-              cmp = true,
-              gitsigns = true,
-              nvimtree = true,
-              treesitter = true,
-              notify = false,
-              mini = {
-                  enabled = true,
-                  indentscope_color = "",
-              },
-              -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-          },
+          -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+        },
       })
 
       vim.cmd.colorscheme 'catppuccin'
@@ -345,13 +344,13 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 
 -- Make line numbers default
-vim.wo.number = true
+vim.o.number = true
 -- Make relative line numbers defaul
-vim.wo.relativenumber = true
+vim.o.relativenumber = true
 
 -- padding
-vim.o.scrolloff=5
-vim.o.sidescrolloff=7
+vim.o.scrolloff = 5
+vim.o.sidescrolloff = 7
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -369,14 +368,14 @@ vim.o.undofile = true
 vim.o.ul = 10000
 
 -- Redo with U
-vim.keymap.set('n', 'U', '<c-r>', {noremap=true, silent=true})
+vim.keymap.set('n', 'U', '<c-r>', { noremap = true, silent = true })
 
 -- Quick Save
-vim.keymap.set('n', 's', ':w<CR>', {noremap=true, silent=true})
+vim.keymap.set('n', 's', ':w<CR>', { noremap = true, silent = true })
 
 -- Set highlight on search
 vim.o.hlsearch = true
-vim.keymap.set('n', ';',':noh<CR>',{noremap=true, silent=true})
+vim.keymap.set('n', ';', ':noh<CR>', { noremap = true, silent = true })
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
@@ -399,16 +398,16 @@ vim.o.termguicolors = true
 -- [[ Basic Keymaps ]]
 
 -- Esc with jk and kj
-vim.keymap.set('i', 'jk','<esc>',{noremap=true, silent=true})
-vim.keymap.set('i', 'kj','<esc>',{noremap=true, silent=true})
+vim.keymap.set('i', 'jk', '<esc>', { noremap = true, silent = true })
+vim.keymap.set('i', 'kj', '<esc>', { noremap = true, silent = true })
 
 -- Easy new line with [ and ]
-vim.keymap.set('n', '<leader>[','O<esc>j',{noremap=true, silent=true})
-vim.keymap.set('n', '[<leader>','O<esc>j',{noremap=true, silent=true})
-vim.keymap.set('n', '<leader>]','o<esc>k',{noremap=true, silent=true})
-vim.keymap.set('n', ']<leader>','o<esc>k',{noremap=true, silent=true})
+vim.keymap.set('n', '<leader>[', 'O<esc>j', { noremap = true, silent = true })
+vim.keymap.set('n', '[<leader>', 'O<esc>j', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>]', 'o<esc>k', { noremap = true, silent = true })
+vim.keymap.set('n', ']<leader>', 'o<esc>k', { noremap = true, silent = true })
 -- Terminal visual block
-vim.keymap.set('n', '<leader>v','<c-v>',{noremap=true, silent=true})
+vim.keymap.set('n', '<leader>v', '<c-v>', { noremap = true, silent = true })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -481,7 +480,7 @@ local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
     require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
+      search_dirs = { git_root },
     })
   end
 end
