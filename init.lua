@@ -326,14 +326,13 @@ require('lazy').setup({
     'github/copilot.vim',
     init = function()
       vim.g.copilot_no_tab_map = true
+      -- vim.g.copilot_proxy_strict_ssl = false
     end,
     config = function()
-      vim.keymap.set('i', '<C-e>', [[copilot#Accept("\<CR>")]], {
-        silent = true,
-        expr = true,
-        script = true,
-        replace_keycodes = false,
-      })
+      vim.keymap.set({ 'n', 'o', 'x' }, '<leader>cp', ':Copilot panel<cr>',
+        { desc = '[C]opilot [P]anel', silent = true, noremap = true })
+      vim.keymap.set('i', '<M-j>', [[copilot#Accept("\<CR>")]],
+        { silent = true, script = true, expr = true })
     end,
   },
 
