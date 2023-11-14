@@ -81,6 +81,7 @@ require('lazy').setup({
   'easymotion/vim-easymotion',
   'github/copilot.vim',
   'iamcco/markdown-preview.nvim',
+  'olacin/telescope-gitmoji.nvim',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -454,10 +455,36 @@ require('telescope').setup {
       },
     },
   },
+  extensions = {
+    gitmoji = {
+      action = function(entry)
+        -- entry = {
+        --   display = "🐛 Fix a bug.",
+        --   index = 4,
+        --   ordinal = "Fix a bug.",
+        --   value = {
+        --     description = "Fix a bug.",
+        --     text = ":bug:",
+        --     value = "🐛"
+        --   }
+        -- }
+        local emoji = entry.value.value
+        vim.ui.input({ prompt = "Enter commit message: " .. emoji .. " " }, function(msg)
+          if not msg then
+            return
+          end
+          -- Insert text instead of emoji in message
+          local emoji_text = entry.value.text
+          vim.cmd(':G commit -m "' .. emoji_text .. ' ' .. msg .. '"')
+        end)
+      end,
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'gitmoji')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -514,6 +541,7 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>gc', ':Telescope gitmoji<cr>', { desc = '[G]it [C]ommit' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
