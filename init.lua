@@ -80,6 +80,7 @@ require('lazy').setup({
   'tpope/vim-surround',
   'easymotion/vim-easymotion',
   'github/copilot.vim',
+  'iamcco/markdown-preview.nvim',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -334,6 +335,14 @@ require('lazy').setup({
       vim.keymap.set('i', '<M-j>', [[copilot#Accept("\<CR>")]],
         { silent = true, script = true, expr = true })
     end,
+  },
+
+  -- Markdown plugin
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = function() vim.fn['mkdp#util#install']() end,
   },
 
 }, {})
