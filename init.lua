@@ -576,6 +576,26 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- productivity keymaps
+-- refresh vimrc
+-- vim.keymap.set('n', '<leader>ll', ':luafile %<cr>', { noremap = true, silent = true })
+
+-- vim.keymap.set('n', '<leader>task',
+vim.keymap.set('n', '<Leader>task',
+  [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/issue//<cr>:%s/bug//<cr>:norm yapG ] ]Gpvip<cr>:norm df|$d5F|r|<cr>]],
+  { noremap = true, silent = true, desc = 'take tasks from html source' })
+--[[
+:%s/<tr/\r\0/g<cr>
+:v/ramez/d<cr>
+:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>
+:%s/\v\<.{-}\>//g<cr>
+:%s/issue//<cr>
+:%s/bug//<cr>
+:norm yapG ] ]Gpvap<cr>
+:norm df|$d5F|r|<cr>
+  ]]
+
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
