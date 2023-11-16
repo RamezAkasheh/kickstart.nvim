@@ -20,6 +20,7 @@
   "nvim-treesitter": { "branch": "master", "commit": "ec09e52d41a9546283fc291845481428c0c6cdc4" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "e1e670a86274d5cb681e475d4891ea1afe605ced" },
   "plenary.nvim": { "branch": "master", "commit": "50012918b2fc8357b87cff2a7f7f0446e47da174" },
+  "symbol-usage.nvim": { "branch": "main", "commit": "f9ff4e78f44f0c4695e7e067a477ee52e105746b" },
   "telescope-gitmoji.nvim": { "branch": "master", "commit": "7e89f41aa25fb06ad5fe27b5524494266e08e3f9" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a" },
   "vim-easymotion": { "branch": "master", "commit": "b3cfab2a6302b3b39f53d9fd2cd997e1127d7878" },
