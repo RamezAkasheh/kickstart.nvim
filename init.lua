@@ -345,6 +345,10 @@ require('lazy').setup({
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
     build = function() vim.fn['mkdp#util#install']() end,
+    config = function()
+      vim.keymap.set({ 'n', 'v' }, '<leader>mp', ':MarkdownPreviewToggle<cr>',
+        { desc = '[M]arkdown [P]review', silent = true, noremap = true })
+    end,
   },
 
   -- Symbol usage plugin
@@ -553,6 +557,7 @@ vim.keymap.set('n', '<leader>[', 'O<esc>j', { noremap = true, silent = true })
 vim.keymap.set('n', '[<leader>', 'O<esc>j', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>]', 'o<esc>k', { noremap = true, silent = true })
 vim.keymap.set('n', ']<leader>', 'o<esc>k', { noremap = true, silent = true })
+
 -- Terminal visual block
 vim.keymap.set('n', '<leader>v', '<c-v>', { noremap = true, silent = true })
 
