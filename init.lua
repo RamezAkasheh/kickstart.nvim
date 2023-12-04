@@ -550,7 +550,7 @@ vim.keymap.set('n', 's', ':w<CR>', { noremap = true, silent = true })
 
 -- Set highlight on search
 vim.o.hlsearch = true
-vim.keymap.set('n', ';', ':noh<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '\\', ':noh<CR>', { noremap = true, silent = true })
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
