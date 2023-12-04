@@ -632,7 +632,7 @@ require('telescope').setup {
         --   }
         -- }
         local emoji = entry.value.value
-        vim.ui.input({ prompt = "Enter commit message: " .. emoji .. " " }, function(msg)
+        vim.ui.input({ prompt = "Enter commit message: " .. emoji .. ": " }, function(msg)
           if not msg then
             return
           end
