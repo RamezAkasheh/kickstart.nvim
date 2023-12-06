@@ -526,6 +526,7 @@ vim.o.relativenumber = true
 -- padding
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 7
+vim.wo.colorcolumn = '80'
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
