@@ -605,6 +605,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- refresh vimrc
 -- vim.keymap.set('n', '<leader>ll', ':luafile %<cr>', { noremap = true, silent = true })
 
+-- pull tasks from html source
 -- vim.keymap.set('n', '<leader>task',
 vim.keymap.set('n', '<Leader>task',
   [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/issue//<cr>:%s/bug//<cr>:norm yapG ] ]Gpvip<cr>:norm df|$d5F|r|<cr>]],
@@ -620,6 +621,10 @@ vim.keymap.set('n', '<Leader>task',
 :norm df|$d5F|r|<cr>
   ]]
 
+-- pull ipv4 from ipconfig and add tomcat link
+vim.keymap.set('n', '<Leader>ip',
+  [[:v/ipv4/d<cr>:%s/^\s.*ip.*: //g<cr>:%s/(.*) /:8080\/AMLUI_tomcat_war_exploded/g<cr>ggyy ]],
+  { noremap = true, silent = true, desc = 'take tasks from html source' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -730,6 +735,7 @@ vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by 
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>gc', ':Telescope gitmoji<cr>', { desc = '[G]it [C]ommit' })
+vim.keymap.set('n', '<leader>tl', ':Telescope git_commits<cr>', { desc = '[T]elescope [L]ogs' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
