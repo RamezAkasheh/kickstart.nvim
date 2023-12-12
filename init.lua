@@ -626,6 +626,12 @@ vim.keymap.set('n', '<Leader>ip',
   [[:v/ipv4/d<cr>:%s/^\s.*ip.*: //g<cr>:%s/(.*) /:8080\/AMLUI_tomcat_war_exploded/g<cr>ggyy ]],
   { noremap = true, silent = true, desc = 'take tasks from html source' })
 
+-- resize splits with ctrl + alt + shift + hjkl
+vim.keymap.set('n', '<C-A-J>', ':resize -1<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-A-K>', ':resize +1<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-A-H>', ':vertical resize -1<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-A-L>', ':vertical resize +1<CR>', { noremap = true, silent = true })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
