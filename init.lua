@@ -608,18 +608,22 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- pull tasks from html source
 -- vim.keymap.set('n', '<leader>task',
 vim.keymap.set('n', '<Leader>task',
-  [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/issue//<cr>:%s/bug//<cr>:norm yapG ] ]Gpvip<cr>:norm df|$d5F|r|<cr>]],
+  [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/issue//e<cr>:%s/bug//e<cr>:%s/change request//e<cr>:norm yapG ] ]Gpvip<cr>:norm df|$d5F|r|<cr>:norm {j vGc|0  |todo   |jkf  vip<cr>:norm 2f|2f d3t|i|             jkA        |             |              |jkyip<cr>]],
   { noremap = true, silent = true, desc = 'take tasks from html source' })
 --[[
 :%s/<tr/\r\0/g<cr>
 :v/ramez/d<cr>
 :%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>
 :%s/\v\<.{-}\>//g<cr>
-:%s/issue//<cr>
-:%s/bug//<cr>
-:norm yapG ] ]Gpvap<cr>
+:%s/issue//e<cr>
+:%s/bug//e<cr>
+:%s/change request//e<cr>
+:norm yipG ] ]Gpvap<cr>
 :norm df|$d5F|r|<cr>
+:norm {j vGc|0  |todo   |jkf  vG<cr>
+:norm 2f|2f d3f|A        |             |              |<cr>
   ]]
+
 
 -- pull ipv4 from ipconfig and add tomcat link
 vim.keymap.set('n', '<Leader>ip',
