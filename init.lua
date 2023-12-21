@@ -584,7 +584,7 @@ vim.keymap.set('n', '<leader>]', 'o<esc>k', { noremap = true, silent = true })
 vim.keymap.set('n', ']<leader>', 'o<esc>k', { noremap = true, silent = true })
 
 -- Terminal visual block
-vim.keymap.set('n', '<leader>v', '<c-v>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<leader>v', '<c-v>', { noremap = true, silent = true })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
