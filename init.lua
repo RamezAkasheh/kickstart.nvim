@@ -202,6 +202,7 @@ require('lazy').setup({
         vim.keymap.set('n', '<leader>hd', gs.diffthis, { desc = 'git [H]unk [D]iff' })
         vim.keymap.set('n', '<leader>hD', function() gs.diffthis('~') end, { desc = 'git [H]unk [D]iff last commit' })
         vim.keymap.set('n', '<leader>td', gs.toggle_deleted, { desc = 'git [T]oggle [D]eleted' })
+        vim.keymap.set('n', '<leader>ga', ':Git commit --amend --no-edit<cr>', { desc = 'git [A]mend' })
 
         -- text object
         vim.keymap.set({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = '[I]nside [H]unk' })
