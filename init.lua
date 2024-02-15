@@ -314,6 +314,9 @@ vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ul = 10000
 
+-- conceallevel
+vim.o.conceallevel = 1
+
 -- Redo with U
 vim.keymap.set('n', 'U', '<c-r>', { noremap = true, silent = true })
 
