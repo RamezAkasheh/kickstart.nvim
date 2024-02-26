@@ -39,6 +39,7 @@ return {
 			-- date_format = "%Y-%m-%d",
 			-- Optional, if you want to change the date format of the default alias of daily notes.
 			-- alias_format = "%B %-d, %Y",
+			alias_format = "%Y-%m-%d",
 			-- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
 			-- template = "daily.md",
 		},
@@ -147,12 +148,12 @@ return {
 		},
 
 		-- -- Optional, customize the backlinks interface.
-		-- backlinks = {
-		-- 	-- The default height of the backlinks pane.
-		-- 	height = 10,
-		-- 	-- Whether or not to wrap lines.
-		-- 	wrap = true,
-		-- },
+		backlinks = {
+			-- The default height of the backlinks pane.
+			height = 10,
+			-- Whether or not to wrap lines.
+			wrap = true,
+		},
 
 		-- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
 		-- URL it will be ignored but you can customize this behavior here.
@@ -281,12 +282,36 @@ return {
 		end
 	end, { noremap = false, expr = true }),
 
-	vim.keymap.set("n", "<C-A-d>", ":ObsidianToday<CR>", { silent = true, noremap = true }),
+	-- Open the current note in Obsidian.
 	vim.keymap.set("n", "<leader>ob", ":ObsidianOpen<CR>", { silent = true, noremap = true }),
+
+	-- daily notes
+	vim.keymap.set("n", "<C-A-d>", ":ObsidianToday<CR>", { silent = true, noremap = true }),
+	vim.keymap.set("n", "<leader>od", [[:norm Gojk<cr>:ObsidianTemplate vdaily.md<CR>]],
+		{ silent = true, noremap = true }),
+
+	-- task
+	vim.keymap.set("n", "<leader>ot", [[:norm Gdgg<cr>:ObsidianTemplate task.md<cr>kkJxG]],
+		{ silent = true, noremap = true }),
 
 	-- conceallevel
 	vim.keymap.set('n', '<leader>tcj', ':set conceallevel=0<CR>',
 		{ noremap = true, silent = true, desc = 'git [T]oggle [C]onceallevel [J] 0' }),
 	vim.keymap.set('n', '<leader>tck', ':set conceallevel=1<CR>',
 		{ noremap = true, silent = true, desc = 'git [T]oggle [C]onceallevel [K] 1' }),
+
+	-- backlinks
+	vim.keymap.set("n", "<leader>bl", ":ObsidianBacklinks<CR>",
+		{ silent = true, noremap = true, desc = "Obsidian [B]ack[L]inks" }),
+
+	-- checkboxes
+	vim.keymap.set("n", "<leader>cf", [[:s/\[.\]/[>]/<CR>]],
+		{ silent = true, noremap = true, desc = "Obsidian [C]heckbox [F]ollowup" }),
+	vim.keymap.set("n", "<leader>cd", [[:s/\[.\]/[x]/<CR>]],
+		{ silent = true, noremap = true, desc = "Obsidian [C]heckbox [D]one" }),
+	vim.keymap.set("n", "<leader>cc", [[:s/\[.\]/[~]/<CR>]],
+		{ silent = true, noremap = true, desc = "Obsidian [C]heckbox [C]ancel" }),
+	vim.keymap.set("n", "<leader>cn", [[:s/\[.\]/[ ]/<CR>]],
+		{ silent = true, noremap = true, desc = "Obsidian [C]heckbox [N]ew" }),
+
 }
