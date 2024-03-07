@@ -122,6 +122,7 @@ vim.opt.ul = 10000
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.incsearch = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
@@ -147,9 +148,9 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 5
-vim.o.sidescrolloff = 7
-vim.wo.colorcolumn = '80'
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 7
+vim.opt.colorcolumn = '80'
 
 -- conceallevel
 vim.o.conceallevel = 1
@@ -214,15 +215,23 @@ vim.keymap.set({ 'n', 'v' }, '<leader>v', '<c-v>', { noremap = true, silent = tr
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.opt.wrap = false
+
 -- productivity keymaps
 -- refresh vimrc
 -- vim.keymap.set('n', '<leader>ll', ':luafile %<cr>', { noremap = true, silent = true })
 
 -- pull tasks from html source
 -- vim.keymap.set('n', '<leader>task',
-vim.keymap.set('n', '<Leader>task',
+vim.keymap.set(
+  'n',
+  '<Leader>task',
   [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/issue//e<cr>:%s/bug//e<cr>:%s/change request//e<cr>:norm yapG ] ]Gpvip<cr>:norm df|$d5F|r|<cr>:norm {j vGc|0  |todo   |jkf  vip<cr>:norm 2f|2f d3t|i|             jkA        |             |              |jkyip<cr>]],
-  { noremap = true, silent = true, desc = 'take tasks from html source' })
+  { noremap = true, silent = true, desc = 'take tasks from html source' }
+)
 --[[
 :%s/<tr/\r\0/g<cr>
 :v/ramez/d<cr>
@@ -238,9 +247,12 @@ vim.keymap.set('n', '<Leader>task',
   ]]
 
 -- pull ipv4 from ipconfig and add tomcat link
-vim.keymap.set('n', '<Leader>ip',
+vim.keymap.set(
+  'n',
+  '<Leader>ip',
   [[:v/ipv4/d<cr>:%s/^\s.*ip.*: //g<cr>:%s/(.*) /:8080\/AMLUI_tomcat_war_exploded/g<cr>ggyy ]],
-  { noremap = true, silent = true, desc = 'take tasks from html source' })
+  { noremap = true, silent = true, desc = 'take tasks from html source' }
+)
 
 -- resize splits with ctrl + alt + shift + hjkl
 vim.keymap.set('n', '<C-A-J>', ':resize -1<CR>', { noremap = true, silent = true })
@@ -431,7 +443,7 @@ require('lazy').setup({
               --   }
               -- }
               local emoji = entry.value.value
-              vim.ui.input({ prompt = "Enter commit message: " .. emoji .. ": " }, function(msg)
+              vim.ui.input({ prompt = 'Enter commit message: ' .. emoji .. ': ' }, function(msg)
                 if not msg then
                   return
                 end
@@ -461,6 +473,10 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
+      vim.keymap.set('n', '<leader>gc', ':Telescope gitmoji<cr>', { desc = '[G]it [C]ommit' })
+      vim.keymap.set('n', '<leader>tl', ':Telescope git_commits<cr>', { desc = '[T]elescope [L]ogs' })
+      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -806,6 +822,7 @@ require('lazy').setup({
     end,
   },
 
+  --[[
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is
@@ -822,6 +839,7 @@ require('lazy').setup({
       vim.cmd.hi 'Comment gui=none'
     end,
   },
+]]
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -862,7 +880,24 @@ require('lazy').setup({
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
+        ensure_installed = {
+          'c',
+          'cpp',
+          'go',
+          'lua',
+          'python',
+          'rust',
+          'tsx',
+          'javascript',
+          'typescript',
+          'vimdoc',
+          'vim',
+          'bash',
+          'json',
+          'markdown',
+          'markdown_inline',
+          'html',
+        },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
@@ -895,7 +930,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information see: :help lazy.nvim-lazy.nvim-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
