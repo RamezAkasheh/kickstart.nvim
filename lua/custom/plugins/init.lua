@@ -9,10 +9,13 @@ return {
   'tpope/vim-surround',
   'easymotion/vim-easymotion',
   'iamcco/markdown-preview.nvim',
-  'olacin/telescope-gitmoji.nvim',
   'Wansmer/symbol-usage.nvim',
 
   -- git plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+
+  -- Telescope plugins
+  'olacin/telescope-gitmoji.nvim',
+  'debugloop/telescope-undo.nvim',
 }

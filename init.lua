@@ -453,6 +453,7 @@ require('lazy').setup({
               end)
             end,
           },
+          undo = {},
         },
       }
 
@@ -460,6 +461,7 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'gitmoji')
+      pcall(require('telescope').load_extension, 'undo')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -477,6 +479,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gc', ':Telescope gitmoji<cr>', { desc = '[G]it [C]ommit' })
       vim.keymap.set('n', '<leader>tl', ':Telescope git_commits<cr>', { desc = '[T]elescope [L]ogs' })
       vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+      vim.keymap.set('n', '<leader>u', ':Telescope undo<cr>', { desc = 'Telescope [U]ndo' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
