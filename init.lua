@@ -238,22 +238,21 @@ vim.opt.wrap = false
 vim.keymap.set(
   'n',
   '<Leader>task',
-  [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/issue//e<cr>:%s/bug//e<cr>:%s/change request//e<cr>:norm yapG ] ]Gpvip<cr>:norm df|$d5F|r|<cr>:norm {j vGc|0  |todo   |jkf  vip<cr>:norm 2f|2f d3t|i|             jkA        |             |              |jkyip<cr>]],
+  [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\// \0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/\v^.{-}\|/|/<cr>:%s/\v\|\zs.{-}([^0-9])*/ [[<cr>:%s/\v[0-9]{5}\zs.{-}$/]<cr>:%s/$/] | Ramez |       |       |        |               |<cr>:%s/^/| <input type="checkbox" unchecked id="ID"> | ID   | todo   <cr>:%s/ID/\=line('.')-1/g<cr>]],
   { noremap = true, silent = true, desc = 'take tasks from html source' }
 )
 --[[
 :%s/<tr/\r\0/g<cr>
 :v/ramez/d<cr>
-:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\//\0  |/g<cr>
+:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\// \0  |/g<cr>
 :%s/\v\<.{-}\>//g<cr>
-:%s/issue//e<cr>
-:%s/bug//e<cr>
-:%s/change request//e<cr>
-:norm yipG ] ]Gpvap<cr>
-:norm df|$d5F|r|<cr>
-:norm {j vGc|0  |todo   |jkf  vG<cr>
-:norm 2f|2f d3f|A        |             |              |<cr>
-  ]]
+:%s/\v^.{-}\|/|/<cr>
+:%s/\v\|\zs.{-}([^0-9])*/ [[<cr>
+:%s/\v[0-9]{5}\zs.{-}$/]<cr>
+:%s/$/] | Ramez |       |       |        |               |<cr>
+:%s/^/| <input type="checkbox" unchecked id="ID"> | ID   | todo   <cr>
+:%s/ID/\=line('.')-1/g<cr>
+]]
 
 -- pull ipv4 from ipconfig and add tomcat link
 vim.keymap.set(
@@ -916,24 +915,24 @@ require('lazy').setup({
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
-          'c',
-          'cpp',
-          'go',
-          'lua',
-          'luadoc',
-          'python',
-          'rust',
-          'tsx',
-          'javascript',
-          'typescript',
-          'vim',
-          'vimdoc',
-          'vim',
-          'bash',
-          'json',
-          'markdown',
-          'markdown_inline',
-          'html',
+        'c',
+        'cpp',
+        'go',
+        'lua',
+        'luadoc',
+        'python',
+        'rust',
+        'tsx',
+        'javascript',
+        'typescript',
+        'vim',
+        'vimdoc',
+        'vim',
+        'bash',
+        'json',
+        'markdown',
+        'markdown_inline',
+        'html',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
