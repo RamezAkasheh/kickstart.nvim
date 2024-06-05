@@ -108,6 +108,11 @@ return {
         action = ':ObsidianBacklinks<CR>',
         { silent = true, noremap = true, desc = 'Obsidian [B]ack[L]inks' },
       },
+      -- ObsidianTags
+      ['<leader>tag'] = {
+        action = ':ObsidianTags<CR>',
+        { silent = true, noremap = true, desc = 'Obsidian [Tag]s' },
+      },
       -- checkboxes
       ['<leader>cf'] = {
         action = [[:s/\[.\]/[>]/<CR>]],
