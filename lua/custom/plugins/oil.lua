@@ -1,5 +1,5 @@
 return {
-  --[[
+  -- [[
   'stevearc/oil.nvim',
   opts = {
     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
