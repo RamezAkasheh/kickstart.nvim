@@ -96,11 +96,11 @@ return {
         { noremap = true, silent = true, desc = 'git [T]oggle [C]onceallevel [1]' },
       },
       ['<leader>tc2'] = {
-        action = ':set conceallevel=1<CR>',
+        action = ':set conceallevel=2<CR>',
         { noremap = true, silent = true, desc = 'git [T]oggle [C]onceallevel [2]' },
       },
       ['<leader>tc3'] = {
-        action = ':set conceallevel=1<CR>',
+        action = ':set conceallevel=3<CR>',
         { noremap = true, silent = true, desc = 'git [T]oggle [C]onceallevel [3]' },
       },
       -- Obsidian backlinks

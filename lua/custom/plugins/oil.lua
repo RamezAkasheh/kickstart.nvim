@@ -26,7 +26,7 @@ return {
       foldcolumn = '0',
       spell = false,
       list = false,
-      conceallevel = 3,
+      conceallevel = 1,
       concealcursor = 'nvic',
     },
     -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
@@ -61,12 +61,12 @@ return {
     keymaps = {
       ['g?'] = 'actions.show_help',
       ['<CR>'] = 'actions.select',
-      ['<C-S>'] = 'actions.select_vsplit',
-      ['<C-H>'] = 'actions.select_split',
-      ['<C-T>'] = 'actions.select_tab',
+      ['<C-l>'] = 'actions.select_vsplit',
+      ['<C-j>'] = 'actions.select_split',
+      -- ['<C-T>'] = 'actions.select_tab',
       ['<C-p>'] = 'actions.preview',
       ['<C-c>'] = 'actions.close',
-      ['<C-l>'] = 'actions.refresh',
+      ['<C-r>'] = 'actions.refresh',
       ['-'] = 'actions.parent',
       ['_'] = 'actions.open_cwd',
       ['`'] = 'actions.cd',
@@ -81,7 +81,7 @@ return {
       border = 'rounded',
     },
     -- Set to false to disable all of the above keymaps
-    use_default_keymaps = true,
+    use_default_keymaps = false,
     view_options = {
       -- Show files and directories that start with "."
       show_hidden = false,
