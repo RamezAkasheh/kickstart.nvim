@@ -83,7 +83,7 @@ return {
       },
       -- Create a new task note.
       ['<leader>ot'] = {
-        action = [[:norm Gdgg<cr>:ObsidianTemplate task.md<cr>kkJxG]],
+        action = [[:norm Gdgg<cr>:ObsidianTemplate task.md<cr>kkJx_]],
         { silent = true, noremap = true },
       },
       -- conceallevel
