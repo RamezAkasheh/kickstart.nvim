@@ -1,3 +1,11 @@
+function ObsidianUpdateTask()
+  vim.cmd 'normal! "pdip'
+  vim.cmd 'normal! Gdgg'
+  vim.cmd 'ObsidianTemplate task.md'
+  vim.cmd 'normal! kkJx_o'
+  vim.cmd 'normal! kvap"pp'
+end
+
 return {
   'epwalsh/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
@@ -83,7 +91,12 @@ return {
       },
       -- Create a new task note.
       ['<leader>ot'] = {
-        action = [[:norm Gdgg<cr>:ObsidianTemplate task.md<cr>kkJx_]],
+        action = [[:norm Gdgg<cr>:ObsidianTemplate task.md<cr>kkJx_ojkk]],
+        { silent = true, noremap = true },
+      },
+      -- Update task note.
+      ['<leader>out'] = {
+        action = ':lua ObsidianUpdateTask()<CR>',
         { silent = true, noremap = true },
       },
       -- conceallevel
