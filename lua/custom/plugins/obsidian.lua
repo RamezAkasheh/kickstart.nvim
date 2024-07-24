@@ -5,6 +5,11 @@ function ObsidianUpdateTask()
   vim.cmd 'normal! kkJx_o'
   vim.cmd 'normal! kvap"pp'
 end
+function ObsidianTask()
+  vim.cmd 'normal! Gdgg'
+  vim.cmd 'ObsidianTemplate task.md'
+  vim.cmd 'normal! kkJx_o'
+end
 
 return {
   'epwalsh/obsidian.nvim',
@@ -91,7 +96,7 @@ return {
       },
       -- Create a new task note.
       ['<leader>ot'] = {
-        action = [[:norm Gdgg<cr>:ObsidianTemplate task.md<cr>kkJx_ojkk]],
+        action = ':lua ObsidianTask()<CR>',
         { silent = true, noremap = true },
       },
       -- Update task note.
