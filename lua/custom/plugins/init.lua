@@ -18,4 +18,9 @@ return {
   -- Telescope plugins
   'olacin/telescope-gitmoji.nvim',
   'debugloop/telescope-undo.nvim',
+
+  --  This is equivalent to:
+  --    require('Comment').setup({})
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
 }

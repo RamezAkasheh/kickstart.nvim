@@ -49,6 +49,12 @@ vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
 vim.keymap.set('n', '<leader>cdd', ':lua D()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gp', ':Oil<CR>')
 
+-- Redo with U
+vim.keymap.set('n', 'U', '<c-r>', { noremap = true, silent = true })
+
+-- Quick Save
+vim.keymap.set('n', 's', ':w<CR>', { noremap = true, silent = true })
+
 -- clears highlight on pressing <Esc> or \ in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '\\', ':noh<CR>', { noremap = true, silent = true })
