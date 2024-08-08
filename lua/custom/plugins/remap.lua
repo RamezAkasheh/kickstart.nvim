@@ -5,11 +5,11 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', 'J', 'mzJ`z')
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', '<C-i>', '<C-u>zz')
-vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
+vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
+vim.keymap.set({ 'n', 'v' }, '<C-i>', '<C-u>zz')
+vim.keymap.set({ 'n', 'v' }, 'n', 'nzzzv')
+vim.keymap.set({ 'n', 'v' }, 'N', 'Nzzzv')
 vim.keymap.set('n', '<leader>zig', '<cmd>LspRestart<cr>')
 
 -- greatest remap ever
@@ -54,6 +54,7 @@ vim.keymap.set('n', 'U', '<c-r>', { noremap = true, silent = true })
 
 -- Quick Save
 vim.keymap.set('n', 's', ':w<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'S', ':w<CR>', { noremap = true, silent = true })
 
 -- clears highlight on pressing <Esc> or \ in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
