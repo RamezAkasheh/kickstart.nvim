@@ -94,7 +94,7 @@ vim.opt.wrap = false
 vim.keymap.set(
   'n',
   '<Leader>task',
-  [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\// \0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/\v^.{-}\|/|/<cr>:%s/\v\|\zs.{-}([^0-9])*/ [[<cr>:%s/\v[0-9]{5}\zs.{-}$/]<cr>:%s/$/] | Ramez |       |       |        |               |<cr>:%s/^/| <input type="checkbox" unchecked id="ID"> | ID   | todo   <cr>:%s/ID/\=line('.')-1/g<cr>]],
+  [[:%s/<tr/\r\0/g<cr>:v/ramez/d<cr>:%s/\v\<td.{-}\>\zs([^<]*)\ze\<\// \0  |/g<cr>:%s/\v\<.{-}\>//g<cr>:%s/\v^.{-}\|/|/<cr>:%s/\v\|\zs.{-}([^0-9])*/ [[<cr>:%s/\v[0-9]{5,6}\zs.{-}$/]<cr>:%s/$/] |     |    | Ramez |       |       |        |               |<cr>:%s/^/| <input type="checkbox" unchecked id="ID"> | ID   | todo   <cr>:%s/ID/\=line('.')-1/g<cr>]],
   { noremap = true, silent = true, desc = 'take tasks from html source' }
 )
 --[[
@@ -104,8 +104,8 @@ vim.keymap.set(
 :%s/\v\<.{-}\>//g<cr>
 :%s/\v^.{-}\|/|/<cr>
 :%s/\v\|\zs.{-}([^0-9])*/ [[<cr>
-:%s/\v[0-9]{5}\zs.{-}$/]<cr>
-:%s/$/] | Ramez |       |       |        |               |<cr>
+:%s/\v[0-9]{5,6}\zs.{-}$/]<cr>
+:%s/$/] |     |    | Ramez |       |       |        |               |<cr>
 :%s/^/| <input type="checkbox" unchecked id="ID"> | ID   | todo   <cr>
 :%s/ID/\=line('.')-1/g<cr>
 ]]
