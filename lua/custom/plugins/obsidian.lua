@@ -243,7 +243,9 @@ return {
       -- vim.fn.jobstart({ "open", url }) -- Mac OS
       -- vim.fn.jobstart({ "xdg-open", url }) -- linux
       -- open in firefox
-      vim.fn.jobstart { 'firefox', url }
+      -- vim.fn.jobstart { 'firefox', url }
+      -- open in msedge (must add to PATH)
+      vim.fn.jobstart { 'msedge', url }
     end,
 
     -- Optional, set to true if you use the Obsidian Advanced URI plugin.
